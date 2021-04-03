@@ -7,8 +7,6 @@ using TMPro;
 
 public class GM : MonoBehaviour
 {
-    public AudioSource hitsound;
-
     public int lives = 3;
     public int bricks = 20;
     public float resetDelay = 1f;
@@ -29,7 +27,7 @@ public class GM : MonoBehaviour
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
-        hitsound = GetComponent<AudioSource>();
+
         Setup();
     }
 
@@ -52,8 +50,9 @@ public class GM : MonoBehaviour
 
     public void Setup()
     {
-        Instantiate(bricksPrefab, transform.position, Quaternion.identity);
         clonePaddle = Instantiate(paddle, transform.position, Quaternion.identity) as GameObject;
+        Instantiate(bricksPrefab, transform.position, Quaternion.identity);
+
     }
 
     private void Reset()
@@ -77,9 +76,8 @@ public class GM : MonoBehaviour
     {
         clonePaddle = Instantiate(paddle, transform.position, Quaternion.identity) as GameObject;
     }
-    public void DestroyBrick()      
+    public void DestroyBrick()
     {
-        hitsound.Play();
         bricks--;
         CheckGameOver();
     }
